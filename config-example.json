@@ -1,5 +1,7 @@
 {
   "clientId": "",
   "guildId": "",
-  "token": ""
+  "discordBotToken": "",
+  "bearerToken": "",
+  "stratzApiUrl": "https://api.stratz.com/api/v1/"
 }

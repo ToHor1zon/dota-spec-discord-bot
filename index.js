@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const { Client, Collection, Intents } = require('discord.js');
-const { token } = require('./config.json');
-
+const { discordBotToken } = require('./config.json');
+const api = require('./plugins/api');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.commands = new Collection();
@@ -12,8 +12,10 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 
-client.once('ready', () => {
-	console.log('Ready!');
+client.once('ready', async () => {
+	// console.log('Ready!');
+  const result = await api.getUserDotaProfile('297362809');
+	console.log(result);
 });
 
 client.on('interactionCreate', async interaction => {
@@ -31,4 +33,4 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 
-client.login(token);
+client.login(discordBotToken);
