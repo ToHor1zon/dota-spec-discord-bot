@@ -2,6 +2,7 @@ const fs = require('node:fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { discordBotToken } = require('./config.json');
 const api = require('./plugins/api');
+const dotaStratzApi = require('./plugins/dotaStratzApi');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.commands = new Collection();
@@ -14,8 +15,7 @@ for (const file of commandFiles) {
 
 client.once('ready', async () => {
 	// console.log('Ready!');
-  const result = await api.getUserDotaProfile('297362809');
-	console.log(result);
+	dotaStratzApi.getLastMatchData('297362809')
 });
 
 client.on('interactionCreate', async interaction => {
