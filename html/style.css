@@ -1,0 +1,27 @@
+body {
+  width: 560px;
+  height: 420px;
+  background-color: #171e13;
+}
+
+.header-title {
+  font-size: 24px;
+  color: bisque;
+}
+
+.header-subtitle {
+  color: goldenrod;
+}
+
+.header-subtitle__hero-lvl {
+  border: 1px solid goldenrod;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 18px;
+}
+
+.header-subtitle__hero-name {
+  font-size: 14px;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Document</title>
+</head>
+<body style="height: 420px; width: 640px">
+  <header class="header">
+    <h1 class="header-title">
+      {{userName}}
+    </h1>
+    <p class="header-subtitle">
+      <span class="header-subtitle__hero-lvl">{{level}}</span>
+      <span class="header-subtitle__hero-name">{{heroInfo.displayName}}</span>
+    </p>
+  </header>
+  <section class="body">
+    <p class="body-time">{{matchTime}}</p>
+    <div class="body-inventory">
+      <div class="body-inventory__item">{{itemsInfo.item0Id.displayName}}</div>
+      <div class="body-inventory__item">{{itemsInfo.item1Id.displayName}}</div>
+      <div class="body-inventory__item">{{itemsInfo.item2Id.displayName}}</div>
+      <div class="body-inventory__item">{{itemsInfo.item3Id.displayName}}</div>
+      <div class="body-inventory__item">{{itemsInfo.item4Id.displayName}}</div>
+      <div class="body-inventory__item">{{itemsInfo.item5Id.displayName}}</div>
+    </div>
+  </section>
+</body>
+</html>

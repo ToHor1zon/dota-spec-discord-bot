@@ -2,7 +2,7 @@ const axios = require('./axios.js');
 
 
 module.exports = {
-  getUserDotaProfile: async (userId) => {
+  getUserProfileData: async (userId) => {
     const { data } = await axios.getStratz(`player/${userId}`);
     return data;
   },
@@ -10,10 +10,14 @@ module.exports = {
     const { data } = await axios.getStratz(`player/${userId}/matches`);
     return data[0];
   },
-  getItemName: async (itemId) => {
+  getItemInfo: async (itemId) => {
     const { data } = await axios.getStratz(`item/${itemId}`);
-    return data.displayName;
+    return data;
   },
+  getHeroInfo: async (heroId) => {
+    const { data } = await axios.getStratz('hero')
+    return data[heroId];
+  }
   
 
     // event loop:

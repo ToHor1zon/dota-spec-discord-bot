@@ -1,25 +1,34 @@
 const api = require('./api');
-const { fancyTimeFormat } = require('./format')
+const { fancyTimeFormat } = require('./format');
+const { generateImage } = require('./imgGenerator');
 
-async function getPlayerInfo(playerInfo) {
-  const { numKills, numDeaths, numAssists, numLastHits, numDenies, goldPerMinute, experiencePerMinute, heroDamage, towerDamage, isVictory, role, networth, level } = playerInfo
-  const itemsRaw = [playerInfo.item0Id, playerInfo.item1Id, playerInfo.item2Id, playerInfo.item3Id, playerInfo.item4Id, playerInfo.item5Id, playerInfo.neutral0Id];
-  const itemNames = [];
+async function getPlayerInfo(fromGameAccountData) {
+  const userProfileData = await api.getUserProfileData(fromGameAccountData.steamAccountId);
+  const userName = userProfileData.steamAccount.name;
 
-  for (const item of itemsRaw) {
-    const name = await api.getItemName(item);
-    itemNames.push(name);
+  const { item0Id, item1Id, item2Id, item3Id, item4Id, item5Id, neutral0Id } = fromGameAccountData
+  const itemIds = { item0Id, item1Id, item2Id, item3Id, item4Id, item5Id, neutral0Id };
+  const itemsInfo = {};
+
+  for (const itemKey in itemIds) {
+    const itemInfo = await api.getItemInfo(itemIds[itemKey]);
+    itemsInfo[itemKey] = itemInfo;
   }
+  console.log(itemsInfo)
 
-
-  return { itemNames, numKills, numDeaths, numAssists, numLastHits, numDenies, goldPerMinute, experiencePerMinute, heroDamage, towerDamage, isVictory, role, networth, level };
+  const heroInfo = await api.getHeroInfo(fromGameAccountData.heroId)
+  return { heroInfo, userName, fromGameAccountData, itemsInfo };
 } 
 
 module.exports = {
-  async getLastMatchData(playerId) {
-    const lastMatch = await api.getUserRecentMatch(playerId);
+  async getLastMatchData(steamAccountId) {
+    const lastMatch = await api.getUserRecentMatch(steamAccountId);
+
     const matchTime = fancyTimeFormat(lastMatch.durationSeconds);
-    const playerInfo = await getPlayerInfo(lastMatch.players[0]);
-    console.log(playerInfo); 
+    const fromGameAccountData = lastMatch.players[0]
+    const fromLastMatchUserInfo = await getPlayerInfo(fromGameAccountData);
+    const matchData = { ...fromLastMatchUserInfo, matchTime };
+
+    generateImage(matchData)
   }
 }
