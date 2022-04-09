@@ -22,6 +22,7 @@ module.exports = {
     nodeHtmlToImage({
       output: './image.png',
       html,
+      transparent: true,
       content: payload,
     })
       .then(() => console.log('The image was created successfully!'))

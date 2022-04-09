@@ -2,7 +2,7 @@ module.exports = {
   profiles: [
     {
       name: 'Сергей Юров',
-      discordId: '',
+      discordId: 248524522494492673,
       dotaProfileId: 297362809,
     }
   ]

@@ -17,6 +17,10 @@ module.exports = {
   getHeroInfo: async (heroId) => {
     const { data } = await axios.getStratz('hero')
     return data[heroId];
+  },
+  getGameModeName: async (gameModeId) => {
+    const { data } = await axios.getStratz('gamemode')
+    return data[String(gameModeId)].name;
   }
   
 
