@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const { stratzApiUrl, bearerToken } = require('../config.json');
+const { stratzApiUrl, bearerToken } = require('../../config.json');
 const Authorization = `Bearer ${bearerToken}`
 
 

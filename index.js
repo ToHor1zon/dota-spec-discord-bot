@@ -1,23 +1,26 @@
-const fs = require('node:fs');
+// const fs = require('node:fs');
 const { Client, Collection, Intents } = require('discord.js');
-const { discordBotToken } = require('./config.json');
-const { generateImage } = require('./plugins/imgGenerator.js');
-const api = require('./plugins/api');
-const dotaStratzApi = require('./plugins/dotaStratzApi');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const { discordBotToken } = require('./config.json');
+const { mainProcess } = require('./src')
+const mongoose = require('mongoose');
+
+mongoose.connect("mongodb://localhost:27017/");
+
 
 client.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+// const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	client.commands.set(command.data.name, command);
-}
+// for (const file of commandFiles) {
+// 	const command = require(`./commands/${file}`);
+// 	// client.commands.set(command.data.name, command);
+// }
 
 client.once('ready', async () => {
-	// console.log('Ready!');
-	// generateImage();
-	dotaStratzApi.getLastMatchData('297362809')
+	console.log('Ready!');
+
+	mainProcess(client);
+	setTimeout(() => mainProcess(client), 30000);
 });
 
 client.on('interactionCreate', async interaction => {

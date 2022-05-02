@@ -104,4 +104,7 @@ dist
 .tern-port
 
 # Custom ignore files
+server/config.json
+
+generatedImages/
 config.json
