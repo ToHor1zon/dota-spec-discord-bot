@@ -15,10 +15,6 @@ const schema = new Schema({
     required: true,
     unique: true,
   },
-  alreadySent: {
-    type: Boolean,
-    default: false,
-  },
   lastMatchId: {
     type: Number,
     default: null,

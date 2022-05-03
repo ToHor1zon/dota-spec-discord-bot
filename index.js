@@ -20,7 +20,7 @@ client.once('ready', async () => {
 	console.log('Ready!');
 
 	mainProcess(client);
-	setTimeout(() => mainProcess(client), 30000);
+	setInterval(() => mainProcess(client), 300000);
 });
 
 client.on('interactionCreate', async interaction => {

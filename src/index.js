@@ -5,16 +5,17 @@ const { sendImage } = require('./discord/message');
 
 module.exports = {
   async mainProcess(client) {
-    const users = await db.getUsers();
-    console.log(users)
+    const users = await db.getUsers() ?? [];
 
     users.forEach(async (user) => {
       try {
         const lastMatchId = await dotaStratzApi.getLastMatchId(user);
 
-        if (user.alreadySent) {
+        if (user.lastMatchId === lastMatchId) {
           return;
         }
+
+        console.log(`New match! User: ${user.name}, MatchId: ${lastMatchId}`);
       
         await db.updateUser(user, 'lastMatchId', lastMatchId);
             
@@ -23,7 +24,6 @@ module.exports = {
         await generateImage(lastMatchData, user, lastMatchId);
 
         await sendImage(client, user, lastMatchId);
-        await db.updateUser(user, 'alreadySent', true);
 
       } catch (err) {
         console.error(err)
