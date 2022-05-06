@@ -12,8 +12,9 @@ client.commands = new Collection();
 
 client.once('ready', async () => {
 	console.log('Ready!');
-	await db.getUsers();
+	await db.deleteUsers();
 	await db.syncProfiles();
+	await db.getUsers();
 });
 
 client.login(discordBotToken);
