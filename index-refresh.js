@@ -15,6 +15,7 @@ client.once('ready', async () => {
 	await db.deleteUsers();
 	await db.syncProfiles();
 	await db.getUsers();
+	console.log('Users refreshed');
 });
 
 client.login(discordBotToken);

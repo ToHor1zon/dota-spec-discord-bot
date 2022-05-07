@@ -20,7 +20,6 @@ readModuleFile('../html/index.html', function (err, body) {
 module.exports = {
   async generateImage(payload, user, matchId) {
     const foo = await nodeHtmlToImage({
-      // output: `../generatedImages/${user.steamAccountId}_${matchId}.png`,
       output: `./src/generatedImages/${user.steamAccountId}_${matchId}.png`,
       html,
       transparent: true,
