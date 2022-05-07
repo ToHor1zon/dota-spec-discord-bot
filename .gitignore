@@ -106,6 +106,7 @@ dist
 # Custom ignore files
 server/config.json
 
-generatedImages/
+src/generatedImages/
+src/html/generatedHtml.html
 config.json
 config-test-server.json
