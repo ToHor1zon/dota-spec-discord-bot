@@ -39,4 +39,9 @@ module.exports = [
     discordId: '175604462591672320',
     steamAccountId: '88117803',
   },
+  {
+    name: 'Филипп Васильев',
+    discordId: '176347656593866753',
+    steamAccountId: '151520766',
+  },
 ];
