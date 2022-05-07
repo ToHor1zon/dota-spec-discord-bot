@@ -38,11 +38,13 @@ function getResultObject(isWin) {
     return {
       text: 'WIN',
       color: '44C230',
+      backgroundColor: '013220',
       fontSize: '224',
     }
   } else {
     return {
       text: 'LOSE',
+      backgroundColor: '80000050',
       color: 'E53845',
       fontSize: '174',
     }

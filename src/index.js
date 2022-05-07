@@ -1,5 +1,8 @@
-const db = require('./database')
+const fs = require('node:fs');
+const db = require('./database');
+const Handlebars = require("handlebars");
 const dotaStratzApi = require('./plugins/dotaStratzApi');
+const { getHtmlContentFromFile } = require('./plugins/files');
 const { generateImage } = require('./plugins/imgGenerator');
 const { sendImage } = require('./discord/message');
 
@@ -31,5 +34,19 @@ module.exports = {
     })
 
     await db.syncProfiles();
+  },
+  async devProcess() {
+    const user = await db.getUser({ steamAccountId: 333654278 });
+    console.log(user)
+    
+    const lastMatchData = await dotaStratzApi.getLastMatchData(user);
+
+    const html = getHtmlContentFromFile();
+
+    const template = Handlebars.compile(html);
+    const foo = template(lastMatchData)
+
+    fs.writeFileSync('./src/html/generatedHtml.html', foo)
+    console.log('successfully generated html')
   }
 }

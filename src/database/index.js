@@ -1,5 +1,5 @@
 const UserModel = require('./models/users');
-const profiles = require('../plugins/profiles')
+const profiles = require('../plugins/profilesSeed')
 
 module.exports = {
   async getUser({ steamAccountId }) {

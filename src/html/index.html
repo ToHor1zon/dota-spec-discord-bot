@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
-  <style>
+<style>
     body {
       font-family: 'Roboto', sans-serif;
       font-size: 20px;
@@ -35,10 +35,24 @@
     }
 
     .profile {
+      position: relative;
       display: flex;
       column-gap: 36px;
       grid-column-start: 1;
       grid-column-end: 3;
+      overflow: hidden;
+    }
+
+    .profile::after {
+      content: '';
+      position: absolute;
+      top: -10%;
+      left: 70%;
+      background-color: #{{ gameResultObject.backgroundColor }};
+      opacity: 0.8;
+      width: 500px;
+      height: 500px;
+      transform: rotate(40deg);
     }
 
     .profile-body {
@@ -46,6 +60,19 @@
       flex-direction: column;
       justify-content: space-between;
       width: 100%;
+      z-index: 1;
+    }
+
+    .profile-body__header {
+      display: flex;
+      justify-content: space-between;
+      margin: 0;
+    }
+
+    .profile-body__result {
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      font-size: 44px;
     }
 
     .profile__hero-photo {
@@ -101,24 +128,39 @@
       font-weight: 100;
     }
 
+    .items {
+      width: 520px;
+    }
+
     .items__wrapper {
       list-style-type: none;
       margin: 0;
       padding: 0;
       display: grid;
       gap: 20px 12px;
-      grid-template-columns: 134px 134px 134px;
+      grid-template-columns: repeat(3, 130px) 94px;
       grid-template-rows: 99px 99px;
     }
 
     .items__element {
       background-color: linear-gradient(180deg, #1a1b1c 20%, #3a3b3d 100%);
-      border-radius: 8px;
       background-repeat: no-repeat;
       background-size: cover;
-      -webkit-box-shadow: 0px 0px 20px 12px rgba(0, 0, 0, 0.35) inset;
-      -moz-box-shadow: 0px 0px 20px 12px rgba(0, 0, 0, 0.35) inset;
+      border-radius: 8px;
       box-shadow: 0px 0px 20px 12px rgba(0, 0, 0, 0.35) inset;
+    }
+
+    .items__element--neutral {
+      border-radius: 40%;
+      width: 94px;
+      height: 94px;
+      transform: translateY(30px);
+    }
+
+    .items__element-wrapper {
+      grid-row-start: 1;
+      grid-row-end: 3;
+      grid-column-start: 4;
     }
 
     .stats {
@@ -129,24 +171,8 @@
     }
 
     .stats .description-termin {
-      flex-basis: 50%;
+      flex-basis: 60%;
       text-align: end;
-    }
-
-    .stats .description-definition {
-      flex-basis: 50%;
-    }
-
-    .stats::after {
-      position: absolute;
-      content: "{{gameResultObject.text}}";
-      font-size: {{gameResultObject.fontSize}}px;
-      color: #{{gameResultObject.color}};
-      opacity: 0.2;
-      font-weight: 800;
-      top: 55%;
-      left: 50%;
-      transform: translate(-50%, -50%);
     }
   </style>
   <title>Document</title>
@@ -157,18 +183,21 @@
     <section class="section profile">
       <img class="profile__hero-photo" src="{{ heroInfo.imageUrl }}">
       <div class="profile-body">
-        <p class="profile-body__name">
-          {{ userName }}
+        <p class="profile-body__header">
+          <span class="profile-body__name">{{ userName }}</span>
+          <span class="profile-body__result" style="color: #{{gameResultObject.color}};">{{ gameResultObject.text }}</span>
         </p>
         <div class="profile-body-hero">
           <dl class="description-list">
             <dt class="description-termin profile-body-hero__level">{{inGameStats.level}}</dt>
             <dd class="description-definition">{{heroInfo.displayName}}</dd>
           </dl>
+          {{#if userPosName}}
           <dl class="description-list">
             <dt class="description-termin">Position:</dt>
             <dd class="description-definition">{{userPosName}}</dd>
           </dl>
+          {{/if}}
         </div>
         <div class="profile-body-game">
           <dl class="description-list">
@@ -194,8 +223,10 @@
         <li class="items__element" style="background-image: url('{{ itemsInfo.item3Id.imageUrl }}')"></li>
         <li class="items__element" style="background-image: url('{{ itemsInfo.item4Id.imageUrl }}')"></li>
         <li class="items__element" style="background-image: url('{{ itemsInfo.item5Id.imageUrl }}')"></li>
+        <li class="items__element-wrapper">
+          <div class="items__element items__element--neutral" style="background-image: url('{{ itemsInfo.neutral0Id.imageUrl }}')"></div>
+        </li>
       </ul>
-      <div class="items__neutral" style="background-image: url('{{ itemsInfo.neutral0Id.imageUrl }}')"></div>
     </section>
 
     <section class="section stats">

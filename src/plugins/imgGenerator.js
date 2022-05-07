@@ -1,25 +1,11 @@
-var fs = require('fs');
-
+const { getHtmlContentFromFile } = require('./files')
 const nodeHtmlToImage = require('node-html-to-image');
-let html;
-
-
-function readModuleFile(path, callback) {
-  try {
-    var filename = require.resolve(path);
-    fs.readFile(filename, 'utf8', callback);
-  } catch (e) {
-    callback(e);
-  }
-}
-
-readModuleFile('../html/index.html', function (err, body) {
-  html = body;
-});
 
 module.exports = {
   async generateImage(payload, user, matchId) {
-    const foo = await nodeHtmlToImage({
+    const html = getHtmlContentFromFile();
+
+    await nodeHtmlToImage({
       output: `./src/generatedImages/${user.steamAccountId}_${matchId}.png`,
       html,
       transparent: true,
