@@ -18,7 +18,7 @@ module.exports = {
           return;
         }
 
-        console.log(`New match! User: ${user.name}, MatchId: ${lastMatchId}`);
+        console.log(`New match! User: ${user.steamAccountId}, MatchId: ${lastMatchId}`);
       
         await db.updateUser(user, 'lastMatchId', lastMatchId);
             
@@ -37,7 +37,6 @@ module.exports = {
   },
   async devProcess() {
     const user = await db.getUser({ steamAccountId: 333654278 });
-    console.log(user)
     
     const lastMatchData = await dotaStratzApi.getLastMatchData(user);
 
