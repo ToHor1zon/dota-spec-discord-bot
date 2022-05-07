@@ -173,7 +173,7 @@
         <div class="profile-body-game">
           <dl class="description-list">
             <dt class="description-termin">Mode:</dt>
-            <dd class="description-definition">All Pick</dd>
+            <dd class="description-definition">{{ gamemode }}</dd>
           </dl>
           <dl class="description-list">
             <dt class="description-termin">Time:</dt>
@@ -181,7 +181,7 @@
           </dl>
           <dl class="description-list">
             <dt class="description-termin">Team:</dt>
-            <dd class="description-definition">Radiant</dd>
+            <dd class="description-definition">{{ team }}</dd>
           </dl>
         </div>
       </div>
@@ -195,6 +195,7 @@
         <li class="items__element" style="background-image: url('{{ itemsInfo.item4Id.imageUrl }}')"></li>
         <li class="items__element" style="background-image: url('{{ itemsInfo.item5Id.imageUrl }}')"></li>
       </ul>
+      <div class="items__neutral" style="background-image: url('{{ itemsInfo.neutral0Id.imageUrl }}')"></div>
     </section>
 
     <section class="section stats">
